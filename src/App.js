@@ -1,42 +1,19 @@
-import React, {useState, useEffect}  from 'react';
-import axios from 'axios';
+import React, {useState, useEffect, useRef}  from 'react';
 
-const App = () => {
+function App () {
   // initialize the useStates
-  const [jokes, setJokes] = useState([]);
-  const [load, setLoad] = useState(false);
-  const [error, setError] = useState('');
-  
-  // We retrieve the api data in the useEffect, 
-  // we assign the setJokes which will be the answer, 
-  // we set the setLoad to true and we assign the setError in case of request failure
-  useEffect(() => {
-    axios.get('http://api.icndb.com/jokes/')
-      .then(res => {
-        setJokes(res.data);
-        setLoad(true);
-      })
-      .catch(err => {
-        setError(err.message);
-        setLoad(true)
-      })
-  }, []);
+  const [value, setValue] = useState('initial');
+  const renderCount = useRef(1);
 
-  // We set up our condition, with the load, we retrieve the data, 
-  // we process the structure and display the result in a small list
-  if (load) {
-    return (
-      <div>
-         <h1>Chuck Norris</h1>
-         <ul>{error ? <li>{error.message}</li> : jokes.value.map((fact) => <li class="joke" id={fact.id}>{fact.joke}</li>)}</ul>
-      </div>
-    );
-  }
-  else {
-    return (
-      <div>Loading...</div>
-    );
-    }
+  return (
+    <div>
+      {/* <h1>Number renders: {renderCount.current}</h1>
+      <h2>State prevue: {prevValue.current}</h2>
+      <input ref={inputRef} type="text" onChange={e => setValue(e.target.value)} value={value} />
+      <button className='btn btn-success' onClick={focus}>Focus</button> */}
+    </div>
+  );
+    
 };
 
 export default App;
